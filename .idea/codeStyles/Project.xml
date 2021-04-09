@@ -1,0 +1,55 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <option name="LINE_SEPARATOR" value="&#10;" />
+    <option name="DO_NOT_FORMAT">
+      <list>
+        <fileSet type="namedScope" name="generate from json schema" pattern="src[server.main]:org.mlayer.events.server.common.schema.v1..*" />
+      </list>
+    </option>
+    <JSCodeStyleSettings version="0">
+      <option name="SPACES_WITHIN_OBJECT_LITERAL_BRACES" value="true" />
+      <option name="SPACES_WITHIN_IMPORTS" value="true" />
+    </JSCodeStyleSettings>
+    <JetCodeStyleSettings>
+      <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
+    </JetCodeStyleSettings>
+    <TypeScriptCodeStyleSettings version="0">
+      <option name="SPACES_WITHIN_OBJECT_LITERAL_BRACES" value="true" />
+      <option name="SPACES_WITHIN_IMPORTS" value="true" />
+    </TypeScriptCodeStyleSettings>
+    <VueCodeStyleSettings>
+      <option name="INDENT_CHILDREN_OF_TOP_LEVEL" value="template,script,style" />
+      <option name="UNIFORM_INDENT" value="false" />
+    </VueCodeStyleSettings>
+    <editorconfig>
+      <option name="ENABLED" value="false" />
+    </editorconfig>
+    <codeStyleSettings language="HTML">
+      <indentOptions>
+        <option name="INDENT_SIZE" value="2" />
+        <option name="TAB_SIZE" value="2" />
+      </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="JAVA">
+      <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
+      <option name="CALL_PARAMETERS_WRAP" value="1" />
+      <option name="METHOD_PARAMETERS_WRAP" value="1" />
+      <option name="BINARY_OPERATION_WRAP" value="1" />
+      <option name="WRAP_LONG_LINES" value="true" />
+      <option name="METHOD_ANNOTATION_WRAP" value="1" />
+      <option name="CLASS_ANNOTATION_WRAP" value="0" />
+      <option name="FIELD_ANNOTATION_WRAP" value="1" />
+      <option name="WRAP_ON_TYPING" value="1" />
+    </codeStyleSettings>
+    <codeStyleSettings language="kotlin">
+      <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
+      <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
+      <option name="METHOD_ANNOTATION_WRAP" value="5" />
+      <option name="CLASS_ANNOTATION_WRAP" value="5" />
+      <option name="FIELD_ANNOTATION_WRAP" value="5" />
+      <option name="PARAMETER_ANNOTATION_WRAP" value="5" />
+      <option name="VARIABLE_ANNOTATION_WRAP" value="5" />
+      <option name="ENUM_CONSTANTS_WRAP" value="5" />
+    </codeStyleSettings>
+  </code_scheme>
+</component>
