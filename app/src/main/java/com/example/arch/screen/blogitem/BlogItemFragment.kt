@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.blog.service.FindBlogItemService
 import com.example.arch.blog.service.RefreshViewsAndVotesService
-import com.example.arch.screen.common.MainActivity
 import com.example.arch.screen.common.base.BaseFragment
-import com.example.arch.screen.common.nav.BackPressDispatcher
 
 class BlogItemFragment : BaseFragment() {
 

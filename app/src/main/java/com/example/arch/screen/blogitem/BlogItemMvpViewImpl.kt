@@ -8,7 +8,6 @@ import com.example.arch.R
 import com.example.arch.blog.model.BlogItem
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.screen.common.mvp.MvpViewObservableBase
-import timber.log.Timber
 
 class BlogItemMvpViewImpl(layoutInflater: LayoutInflater, parent: ViewGroup?) :
     MvpViewObservableBase<BlogItemMvpView.Listener>(), BlogItemMvpView {

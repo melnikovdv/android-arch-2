@@ -22,7 +22,7 @@ class BlogItemsAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): BlogItemViewHolder {
         val blogItemsRowMvpView: BlogItemsRowMvpView =
-            BlogItemsRowMvpViewImpl(layoutInflater, null, this)
+            BlogItemsRowMvpViewImpl(layoutInflater, viewGroup, this)
         return BlogItemViewHolder(blogItemsRowMvpView)
     }
 
