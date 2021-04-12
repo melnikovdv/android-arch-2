@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import com.example.arch.R
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.screen.blogitem.BlogItemFragment
+import com.example.arch.screen.blogitem2.BlogItemMvvmFragment
 import com.example.arch.screen.blogitems.BlogItemsFragment
 import com.example.arch.screen.root.RootFragment
 import com.ncapdevi.fragnav.FragNavController
@@ -43,5 +44,9 @@ class ScreenNavigator(
 
     fun navigateUp() {
         fragNavController.popFragment()
+    }
+
+    fun toBlogItemVm(id: BlogItemId) {
+        fragNavController.pushFragment(BlogItemMvvmFragment.newInstance(id))
     }
 }

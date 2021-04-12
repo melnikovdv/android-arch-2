@@ -4,6 +4,7 @@ import com.example.arch.blog.model.BlogItem
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.blog.service.FindBlogItemService
 import com.example.arch.blog.service.RefreshViewsAndVotesService
+import com.example.arch.blog.service.ServiceResult
 import com.example.arch.screen.common.mvp.MvpPresenter
 import com.example.arch.screen.common.nav.BackPressDispatcher
 import com.example.arch.screen.common.nav.ScreenNavigator
@@ -31,9 +32,9 @@ class BlogItemPresenter(
     private fun loadItem() {
         coroutineScope.launch {
             when (val result = findBlogItemService.find(id)) {
-                FindBlogItemService.Result.Failure -> onError()
-                FindBlogItemService.Result.NotFound -> onItemNotFound()
-                is FindBlogItemService.Result.Success -> onItemLoaded(result.blogItem)
+                ServiceResult.Failure -> onError()
+                ServiceResult.NotFound -> onItemNotFound()
+                is ServiceResult.Success -> onItemLoaded(result.blogItem)
             }
         }
     }
@@ -74,9 +75,9 @@ class BlogItemPresenter(
         view.showProgress()
         coroutineScope.launch {
             when (val result = refreshViewsAndVotesService.refresh(id)) {
-                RefreshViewsAndVotesService.Result.Failure -> onError()
-                RefreshViewsAndVotesService.Result.NotFound -> onItemNotFound()
-                is RefreshViewsAndVotesService.Result.Success -> onItemLoaded(result.blogItem)
+                ServiceResult.Failure -> onError()
+                ServiceResult.NotFound -> onItemNotFound()
+                is ServiceResult.Success -> onItemLoaded(result.blogItem)
             }
         }
     }

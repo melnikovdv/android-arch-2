@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        >
+        android:padding="16dp">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            >
+            android:orientation="horizontal">
 
         <Button
                 android:id="@+id/root_fragment__btnBlogItem"
@@ -20,16 +16,21 @@
                 android:layout_height="wrap_content"
                 android:minWidth="100dp"
                 android:text="@string/show_blog_item"
-                android:layout_marginEnd="@dimen/padding_small"
-                />
+                android:layout_marginEnd="@dimen/padding_small" />
 
         <EditText
                 android:id="@+id/root_fragment__edtBlogItemId"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:text="90"
-                android:inputType="numberDecimal"
-                />
+                android:inputType="numberDecimal" />
+
+        <Button
+                android:id="@+id/root_fragment__btnBlogItemIdInc"
+                android:layout_width="40dp"
+                android:text="@string/plus"
+                android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 
@@ -38,8 +39,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="100dp"
-            android:layout_gravity="center"
-            android:text="@string/show_blog_items"
-            />
+            android:text="@string/show_blog_items" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <Button
+                android:id="@+id/root_fragment__btnBlogItemVm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100dp"
+                android:text="@string/show_blog_item_vm"
+                android:layout_marginEnd="@dimen/padding_small" />
+
+        <EditText
+                android:id="@+id/root_fragment__edtBlogItemIdVm"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="90"
+                android:inputType="numberDecimal" />
+
+        <Button
+                android:id="@+id/root_fragment__btnBlogItemIdVmInc"
+                android:layout_width="40dp"
+                android:text="@string/plus"
+                android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </LinearLayout>

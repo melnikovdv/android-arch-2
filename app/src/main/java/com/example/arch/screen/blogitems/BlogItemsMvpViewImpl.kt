@@ -3,6 +3,7 @@ package com.example.arch.screen.blogitems
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arch.R
@@ -21,7 +22,9 @@ class BlogItemsMvpViewImpl(layoutInflater: LayoutInflater, parent: ViewGroup?) :
     private val blogItemsAdapter = BlogItemsAdapter(layoutInflater, this)
 
     init {
-        rvBlogItems.layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
+        rvBlogItems.layoutManager = layoutManager
+        rvBlogItems.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
         rvBlogItems.adapter = blogItemsAdapter
     }
 

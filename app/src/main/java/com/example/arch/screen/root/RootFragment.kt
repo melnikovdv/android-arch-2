@@ -16,6 +16,10 @@ class RootFragment : BaseFragment() {
     private lateinit var btnBlogItem: Button
     private lateinit var btnBlogItems: Button
     private lateinit var edtBlogItemId: EditText
+    private lateinit var btnBlogItemVm: Button
+    private lateinit var edtBlogItemIdVm: EditText
+    private lateinit var btnBlogItemIdInc: Button
+    private lateinit var btnBlogItemIdVmInc: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +30,10 @@ class RootFragment : BaseFragment() {
         btnBlogItem = rootView.findViewById(R.id.root_fragment__btnBlogItem)
         edtBlogItemId = rootView.findViewById(R.id.root_fragment__edtBlogItemId)
         btnBlogItems = rootView.findViewById(R.id.root_fragment__btnBlogItems)
+        btnBlogItemVm = rootView.findViewById(R.id.root_fragment__btnBlogItemVm)
+        edtBlogItemIdVm = rootView.findViewById(R.id.root_fragment__edtBlogItemIdVm)
+        btnBlogItemIdInc = rootView.findViewById(R.id.root_fragment__btnBlogItemIdInc)
+        btnBlogItemIdVmInc = rootView.findViewById(R.id.root_fragment__btnBlogItemIdVmInc)
         setup()
         return rootView
     }
@@ -36,6 +44,16 @@ class RootFragment : BaseFragment() {
             mainActivity.screenNavigator.toBlogItem(id)
         }
         btnBlogItems.setOnClickListener { mainActivity.screenNavigator.toBlogItems() }
+        btnBlogItemVm.setOnClickListener {
+            val id = BlogItemId(edtBlogItemIdVm.text.toString().toLong())
+            mainActivity.screenNavigator.toBlogItemVm(id)
+        }
+        btnBlogItemIdInc.setOnClickListener {
+            edtBlogItemId.setText((edtBlogItemId.text.toString().toInt() + 1).toString())
+        }
+        btnBlogItemIdVmInc.setOnClickListener {
+            edtBlogItemIdVm.setText((edtBlogItemIdVm.text.toString().toInt() + 1).toString())
+        }
     }
 
     companion object {

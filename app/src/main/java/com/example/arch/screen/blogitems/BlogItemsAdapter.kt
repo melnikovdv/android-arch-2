@@ -39,9 +39,9 @@ class BlogItemsAdapter(
         listener.onBlogItemClicked(blogItemId)
     }
 
-    fun bindData(blogItems: List<BlogItem>?) {
+    fun bindData(blogItems: List<BlogItem>) {
         items.clear()
-        items.addAll(blogItems!!)
+        items.addAll(blogItems)
         notifyDataSetChanged()
     }
 }

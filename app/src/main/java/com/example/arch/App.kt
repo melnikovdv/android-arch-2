@@ -23,10 +23,6 @@ class App : Application() {
         super.onCreate()
         Timber.plant(DebugTree())
         Timber.d("onCreate")
-//        coroutineScope.launch {
-//            val item = api.fetchBlogItem(BlogItemId(1))
-//            Timber.d(item.toString())
-//        }
     }
 
     val generator: Generator by lazy { Generator() }
@@ -39,7 +35,8 @@ class App : Application() {
         FindBlogItemService(
             blogItemRepo,
             api,
-            generator
+            generator,
+            Dispatchers.IO
         )
     }
 
@@ -47,7 +44,8 @@ class App : Application() {
         RefreshViewsAndVotesService(
             blogItemRepo,
             api,
-            generator
+            generator,
+            Dispatchers.IO
         )
     }
 }
