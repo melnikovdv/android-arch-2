@@ -10,18 +10,19 @@ import androidx.fragment.app.Fragment
 import com.example.arch.R
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.databinding.BlogItemDatabindingFragmentBinding
+import com.example.arch.di.Service
 import com.example.arch.screen.blogitem2.util.Status
+import com.example.arch.screen.common.base.BaseFragment
 import com.example.arch.screen.common.mvp.factory.MvpViewFactory
 import com.example.arch.screen.common.mvvm.ViewModelFactory
-import com.example.arch.screen.common.base.BaseFragment
 import com.example.arch.screen.common.nav.BackPressDispatcher
 
 
 class BlogItemMvvmFragment : BaseFragment() {
 
-    lateinit var viewModelFactory: ViewModelFactory
-    lateinit var mvpViewFactory: MvpViewFactory
-    lateinit var backPressDispatcher: BackPressDispatcher
+    @field:Service private lateinit var viewModelFactory: ViewModelFactory
+    @field:Service private lateinit var mvpViewFactory: MvpViewFactory
+    @field:Service private lateinit var backPressDispatcher: BackPressDispatcher
 
     private lateinit var blogItemViewModel: BlogItemViewModel
 

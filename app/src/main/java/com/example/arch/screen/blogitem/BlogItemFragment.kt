@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.arch.blog.model.BlogItemId
+import com.example.arch.di.Service
+import com.example.arch.screen.common.base.BaseFragment
 import com.example.arch.screen.common.mvp.factory.MvpViewFactory
 import com.example.arch.screen.common.mvp.factory.PresenterFactory
-import com.example.arch.screen.common.base.BaseFragment
 
 class BlogItemFragment : BaseFragment() {
 
     private lateinit var presenter: BlogItemPresenter
 
-    lateinit var presenterFactory: PresenterFactory
-    lateinit var mvpViewFactory: MvpViewFactory
+    @field:Service private lateinit var presenterFactory: PresenterFactory
+    @field:Service private lateinit var mvpViewFactory: MvpViewFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injector.inject(this)

@@ -30,4 +30,8 @@ class PresentationCompositionRoot(
     }
 
     val screenNavigator get() = activityCompositionRoot.screenNavigator
+
+    val findBlogItemService get() = activityCompositionRoot.findBlogItemService
+
+    val refreshViewsAndVotesService get() = activityCompositionRoot.refreshViewsAndVotesService
 }

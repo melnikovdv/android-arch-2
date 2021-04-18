@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.example.arch.R
 import com.example.arch.blog.model.BlogItemId
+import com.example.arch.di.Service
 import com.example.arch.screen.common.base.BaseFragment
 import com.example.arch.screen.common.nav.ScreenNavigator
 
@@ -22,11 +23,11 @@ class RootFragment : BaseFragment() {
     private lateinit var btnBlogItemIdInc: Button
     private lateinit var btnBlogItemIdVmInc: Button
 
-    lateinit var screenNavigator: ScreenNavigator
+    @field:Service private lateinit var screenNavigator: ScreenNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         injector.inject(this)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
