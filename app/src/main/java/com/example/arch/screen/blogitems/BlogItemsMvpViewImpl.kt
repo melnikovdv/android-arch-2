@@ -10,16 +10,21 @@ import com.example.arch.R
 import com.example.arch.blog.model.BlogItem
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.screen.blogitems.row.BlogItemsRowMvpView
+import com.example.arch.screen.common.mvp.factory.MvpViewFactory
 import com.example.arch.screen.common.mvp.MvpViewObservableBase
 
-class BlogItemsMvpViewImpl(layoutInflater: LayoutInflater, parent: ViewGroup?) :
+class BlogItemsMvpViewImpl(
+    layoutInflater: LayoutInflater,
+    parent: ViewGroup?,
+    viewFactory: MvpViewFactory,
+) :
     MvpViewObservableBase<BlogItemsMvpView.Listener>(), BlogItemsMvpView,
     BlogItemsRowMvpView.Listener {
 
     override var rootView: View =
         layoutInflater.inflate(R.layout.blog_items_fragment, parent, false)
     private val rvBlogItems: RecyclerView = findViewById(R.id.blog_items_fragment__rvBlogItems)
-    private val blogItemsAdapter = BlogItemsAdapter(layoutInflater, this)
+    private val blogItemsAdapter = viewFactory.createBlogItemsAdapter(this)
 
     init {
         val layoutManager = LinearLayoutManager(context)

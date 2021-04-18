@@ -7,35 +7,29 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.arch.R
 import com.example.arch.blog.model.BlogItemId
-import com.example.arch.blog.service.FindBlogItemService
-import com.example.arch.blog.service.RefreshViewsAndVotesService
 import com.example.arch.databinding.BlogItemDatabindingFragmentBinding
 import com.example.arch.screen.blogitem2.util.Status
+import com.example.arch.screen.common.mvp.factory.MvpViewFactory
+import com.example.arch.screen.common.mvvm.ViewModelFactory
 import com.example.arch.screen.common.base.BaseFragment
+import com.example.arch.screen.common.nav.BackPressDispatcher
 
 
 class BlogItemMvvmFragment : BaseFragment() {
 
-    private val findBlogItemService: FindBlogItemService
-        get() = app.findBlogItemService
-    private val refreshViewsAndVotesService: RefreshViewsAndVotesService
-        get() = app.refreshViewsAndVotesService
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var mvpViewFactory: MvpViewFactory
+    lateinit var backPressDispatcher: BackPressDispatcher
 
     private lateinit var blogItemViewModel: BlogItemViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        injector.inject(this)
         super.onCreate(savedInstanceState)
         val blogItemId = BlogItemId(arguments!!.getLong(ARG_ITEM_ID))
-        val factory = BlogItemViewModelFactory(
-            blogItemId,
-            findBlogItemService,
-            refreshViewsAndVotesService,
-            mainActivity.screenNavigator
-        )
-        blogItemViewModel = ViewModelProvider(this, factory).get(BlogItemViewModel::class.java)
+        blogItemViewModel = viewModelFactory.createBlogItemViewModel(blogItemId, this)
         blogItemViewModel.loadItem()
     }
 
@@ -62,12 +56,12 @@ class BlogItemMvvmFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        mainActivity.registerListener(blogItemViewModel)
+        backPressDispatcher.registerListener(blogItemViewModel)
     }
 
     override fun onStop() {
         super.onStop()
-        mainActivity.unregisterListener(blogItemViewModel)
+        backPressDispatcher.unregisterListener(blogItemViewModel)
     }
 
     private fun showToast(text: String) {

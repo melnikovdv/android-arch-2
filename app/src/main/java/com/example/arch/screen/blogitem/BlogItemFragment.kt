@@ -6,34 +6,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.arch.blog.model.BlogItemId
-import com.example.arch.blog.service.FindBlogItemService
-import com.example.arch.blog.service.RefreshViewsAndVotesService
+import com.example.arch.screen.common.mvp.factory.MvpViewFactory
+import com.example.arch.screen.common.mvp.factory.PresenterFactory
 import com.example.arch.screen.common.base.BaseFragment
 
 class BlogItemFragment : BaseFragment() {
 
     private lateinit var presenter: BlogItemPresenter
-    private val findBlogItemService: FindBlogItemService
-        get() = app.findBlogItemService
-    private val refreshViewsAndVotesService: RefreshViewsAndVotesService
-        get() = app.refreshViewsAndVotesService
+
+    lateinit var presenterFactory: PresenterFactory
+    lateinit var mvpViewFactory: MvpViewFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        injector.inject(this)
         super.onCreate(savedInstanceState)
-        val id = arguments!!.getLong(ARG_ITEM_ID)
-        presenter = BlogItemPresenter(
-            id = BlogItemId(id),
-            screenNavigator = mainActivity.screenNavigator,
-            backPressDispatcher = mainActivity,
-            findBlogItemService = findBlogItemService,
-            refreshViewsAndVotesService = refreshViewsAndVotesService
-        )
+        val id = BlogItemId(arguments!!.getLong(ARG_ITEM_ID))
+        presenter = presenterFactory.createBlogItemPresenter(id)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val view: BlogItemMvpView = BlogItemMvpViewImpl(inflater, container)
+        val view = mvpViewFactory.createBlogItemMvpView(container)
         presenter.bindView(view)
         return view.rootView
     }

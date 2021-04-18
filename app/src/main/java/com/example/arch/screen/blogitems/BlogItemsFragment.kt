@@ -5,29 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.arch.blog.service.FindBlogItemService
+import com.example.arch.screen.common.mvp.factory.MvpViewFactory
+import com.example.arch.screen.common.mvp.factory.PresenterFactory
 import com.example.arch.screen.common.base.BaseFragment
 
 class BlogItemsFragment : BaseFragment() {
 
+    lateinit var presenterFactory: PresenterFactory
+    lateinit var mvpViewFactory: MvpViewFactory
+
     private lateinit var presenter: BlogItemsPresenter
-    private val findBlogItemService: FindBlogItemService
-        get() = app.findBlogItemService
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        injector.inject(this)
         super.onCreate(savedInstanceState)
-        presenter = BlogItemsPresenter(
-            screenNavigator = mainActivity.screenNavigator,
-            backPressDispatcher = mainActivity,
-            findBlogItemService = findBlogItemService
-        )
+        presenter = presenterFactory.createBlogItemsPresenter()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: BlogItemsMvpView = BlogItemsMvpViewImpl(inflater, container)
+        val view = mvpViewFactory.createBlogItemsView(container)
         presenter.bindView(view)
         return view.rootView
     }

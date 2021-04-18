@@ -1,18 +1,17 @@
 package com.example.arch.screen.blogitems
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arch.blog.model.BlogItem
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.screen.blogitems.BlogItemsAdapter.BlogItemViewHolder
 import com.example.arch.screen.blogitems.row.BlogItemsRowMvpView
-import com.example.arch.screen.blogitems.row.BlogItemsRowMvpViewImpl
+import com.example.arch.screen.common.mvp.factory.MvpViewFactory
 import java.util.*
 
 class BlogItemsAdapter(
-    private val layoutInflater: LayoutInflater,
-    private val listener: BlogItemsRowMvpView.Listener
+    private val listener: BlogItemsRowMvpView.Listener,
+    private val mvpViewFactory: MvpViewFactory,
 ) : RecyclerView.Adapter<BlogItemViewHolder>(), BlogItemsRowMvpView.Listener {
 
     class BlogItemViewHolder(val blogItemsRowMvpView: BlogItemsRowMvpView) :
@@ -21,8 +20,7 @@ class BlogItemsAdapter(
     private val items: MutableList<BlogItem> = ArrayList()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): BlogItemViewHolder {
-        val blogItemsRowMvpView: BlogItemsRowMvpView =
-            BlogItemsRowMvpViewImpl(layoutInflater, viewGroup, this)
+        val blogItemsRowMvpView = mvpViewFactory.createBlogItemsRowView(viewGroup, this)
         return BlogItemViewHolder(blogItemsRowMvpView)
     }
 

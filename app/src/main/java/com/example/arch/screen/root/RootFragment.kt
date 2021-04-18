@@ -9,6 +9,7 @@ import android.widget.EditText
 import com.example.arch.R
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.screen.common.base.BaseFragment
+import com.example.arch.screen.common.nav.ScreenNavigator
 
 
 class RootFragment : BaseFragment() {
@@ -20,6 +21,13 @@ class RootFragment : BaseFragment() {
     private lateinit var edtBlogItemIdVm: EditText
     private lateinit var btnBlogItemIdInc: Button
     private lateinit var btnBlogItemIdVmInc: Button
+
+    lateinit var screenNavigator: ScreenNavigator
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        injector.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,12 +49,12 @@ class RootFragment : BaseFragment() {
     private fun setup() {
         btnBlogItem.setOnClickListener {
             val id = BlogItemId(edtBlogItemId.text.toString().toLong())
-            mainActivity.screenNavigator.toBlogItem(id)
+            screenNavigator.toBlogItem(id)
         }
-        btnBlogItems.setOnClickListener { mainActivity.screenNavigator.toBlogItems() }
+        btnBlogItems.setOnClickListener { screenNavigator.toBlogItems() }
         btnBlogItemVm.setOnClickListener {
             val id = BlogItemId(edtBlogItemIdVm.text.toString().toLong())
-            mainActivity.screenNavigator.toBlogItemVm(id)
+            screenNavigator.toBlogItemVm(id)
         }
         btnBlogItemIdInc.setOnClickListener {
             edtBlogItemId.setText((edtBlogItemId.text.toString().toInt() + 1).toString())
