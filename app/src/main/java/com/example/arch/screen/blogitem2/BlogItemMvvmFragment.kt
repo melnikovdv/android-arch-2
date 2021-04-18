@@ -10,24 +10,22 @@ import androidx.fragment.app.Fragment
 import com.example.arch.R
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.databinding.BlogItemDatabindingFragmentBinding
-import com.example.arch.di.Service
 import com.example.arch.screen.blogitem2.util.Status
 import com.example.arch.screen.common.base.BaseFragment
-import com.example.arch.screen.common.mvp.factory.MvpViewFactory
 import com.example.arch.screen.common.mvvm.ViewModelFactory
 import com.example.arch.screen.common.nav.BackPressDispatcher
+import javax.inject.Inject
 
 
 class BlogItemMvvmFragment : BaseFragment() {
 
-    @field:Service private lateinit var viewModelFactory: ViewModelFactory
-    @field:Service private lateinit var mvpViewFactory: MvpViewFactory
-    @field:Service private lateinit var backPressDispatcher: BackPressDispatcher
+    @Inject lateinit var viewModelFactory: ViewModelFactory
+    @Inject lateinit var backPressDispatcher: BackPressDispatcher
 
     private lateinit var blogItemViewModel: BlogItemViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injector.inject(this)
+        presentationComponent.inject(this)
         super.onCreate(savedInstanceState)
         val blogItemId = BlogItemId(arguments!!.getLong(ARG_ITEM_ID))
         blogItemViewModel = viewModelFactory.createBlogItemViewModel(blogItemId, this)

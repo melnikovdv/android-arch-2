@@ -5,20 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.arch.di.Service
 import com.example.arch.screen.common.base.BaseFragment
 import com.example.arch.screen.common.mvp.factory.MvpViewFactory
 import com.example.arch.screen.common.mvp.factory.PresenterFactory
+import javax.inject.Inject
 
 class BlogItemsFragment : BaseFragment() {
 
-    @field:Service private lateinit var presenterFactory: PresenterFactory
-    @field:Service private lateinit var mvpViewFactory: MvpViewFactory
+    @Inject lateinit var presenterFactory: PresenterFactory
+    @Inject lateinit var mvpViewFactory: MvpViewFactory
 
     private lateinit var presenter: BlogItemsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injector.inject(this)
+        presentationComponent.inject(this)
         super.onCreate(savedInstanceState)
         presenter = presenterFactory.createBlogItemsPresenter()
     }

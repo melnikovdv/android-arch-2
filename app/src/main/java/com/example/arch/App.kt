@@ -1,19 +1,23 @@
 package com.example.arch
 
 import android.app.Application
-import com.example.arch.di.AppCompositionRoot
+import com.example.arch.di.app.AppComponent
+import com.example.arch.di.app.AppModule
+import com.example.arch.di.app.DaggerAppComponent
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
 
 class App : Application() {
 
-    lateinit var appCompositionRoot: AppCompositionRoot
+    lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(DebugTree())
         Timber.d("onCreate")
-        appCompositionRoot = AppCompositionRoot(this)
+        appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(this))
+            .build()
     }
 }

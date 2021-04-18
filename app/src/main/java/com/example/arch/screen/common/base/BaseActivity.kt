@@ -4,34 +4,42 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.arch.App
-import com.example.arch.di.ActivityCompositionRoot
-import com.example.arch.di.PresentationCompositionRoot
+import com.example.arch.di.activity.ActivityComponent
+import com.example.arch.di.activity.ActivityModule
+import com.example.arch.di.activity.DaggerActivityComponent
+import com.example.arch.di.presentation.DaggerPresentationComponent
+import com.example.arch.di.presentation.PresentationComponent
+import com.example.arch.di.presentation.PresentationModule
 import com.example.arch.screen.common.nav.BackPressDispatcher
 import com.example.arch.screen.common.nav.BackPressedListener
 
 abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
 
-    private val appCompositionRoot get() = (application as App).appCompositionRoot
+    private val appComponent get() = (application as App).appComponent
 
-    lateinit var activityCompositionRoot: ActivityCompositionRoot
+    lateinit var activityComponent: ActivityComponent
         private set
 
-    val presentationCompositionRoot by lazy {
-        PresentationCompositionRoot(activityCompositionRoot)
-    }
+    lateinit var presentationComponent: PresentationComponent
+        private set
 
     private val backPressedListeners: MutableSet<BackPressedListener> = HashSet()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityCompositionRoot = ActivityCompositionRoot(
-            this, appCompositionRoot, savedInstanceState
-        )
+        activityComponent = DaggerActivityComponent.builder()
+            .activityModule(ActivityModule(this, appComponent, savedInstanceState))
+            .build()
+        activityComponent.screenNavigator()
+        presentationComponent = DaggerPresentationComponent.builder()
+            .presentationModule(PresentationModule(activityComponent))
+            .build()
+
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
-        activityCompositionRoot.screenNavigator.onSaveInstanceState(outState)
+        activityComponent.screenNavigator().onSaveInstanceState(outState)
     }
 
     override fun registerListener(listener: BackPressedListener) {
