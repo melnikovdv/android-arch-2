@@ -5,10 +5,14 @@ import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.arch.App
 import com.example.arch.di.activity.ActivityComponent
+import com.example.arch.di.qual.ApiToken
+import com.example.arch.di.qual.MapboxToken
 import com.example.arch.screen.common.nav.BackPressDispatcher
 import com.example.arch.screen.common.nav.BackPressedListener
 import com.example.arch.screen.common.nav.ScreenNavigator
+import timber.log.Timber
 import javax.inject.Inject
+import javax.inject.Named
 
 abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
 
@@ -18,6 +22,9 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
     private val backPressedListeners: MutableSet<BackPressedListener> = HashSet()
 
     @Inject lateinit var screenNavigator: ScreenNavigator
+    @Inject @ApiToken lateinit var apiToken: String
+    @Inject @MapboxToken lateinit var mapboxToken: String
+    @Inject @Named("some") lateinit var someString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +34,9 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
             .savedInstanceState(savedInstanceState)
             .build()
         activityComponent.inject(this)
+        Timber.d("Qualifier api: $apiToken")
+        Timber.d("Qualifier mapbox: $mapboxToken")
+        Timber.d("Qualifier some: $someString")
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
