@@ -7,8 +7,10 @@ import com.example.arch.screen.blogitems.BlogItemsFragment
 import com.example.arch.screen.root.RootFragment
 import dagger.Component
 
-@Component(modules = [PresentationModule::class])
-interface PresentationComponent {
+@Component(
+    dependencies = [ActivityComponent::class],
+    modules = [PresentationModule::class]
+) @PresentationScope interface PresentationComponent {
 
     fun activityComponent(): ActivityComponent
 

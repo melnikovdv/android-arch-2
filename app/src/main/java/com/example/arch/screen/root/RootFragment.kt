@@ -10,6 +10,7 @@ import com.example.arch.R
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.screen.common.base.BaseFragment
 import com.example.arch.screen.common.nav.ScreenNavigator
+import javax.inject.Inject
 
 
 class RootFragment : BaseFragment() {
@@ -22,12 +23,11 @@ class RootFragment : BaseFragment() {
     private lateinit var btnBlogItemIdInc: Button
     private lateinit var btnBlogItemIdVmInc: Button
 
-    lateinit var screenNavigator: ScreenNavigator
+    @Inject lateinit var screenNavigator: ScreenNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presentationComponent.inject(this)
-        screenNavigator = presentationComponent.activityComponent().screenNavigator()
     }
 
     override fun onCreateView(

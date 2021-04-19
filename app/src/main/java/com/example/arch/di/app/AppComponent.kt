@@ -10,8 +10,9 @@ import dagger.Component
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
-@Singleton @Component(modules = [AppModule::class])
-interface AppComponent {
+@Component(
+    modules = [AppModule::class]
+) @Singleton interface AppComponent {
     fun application(): Application
 
     fun generator(): Generator

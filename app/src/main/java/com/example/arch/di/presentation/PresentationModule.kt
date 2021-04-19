@@ -3,7 +3,6 @@ package com.example.arch.di.presentation
 import android.view.LayoutInflater
 import com.example.arch.blog.service.FindBlogItemService
 import com.example.arch.blog.service.RefreshViewsAndVotesService
-import com.example.arch.di.activity.ActivityComponent
 import com.example.arch.screen.common.mvp.factory.MvpViewFactory
 import com.example.arch.screen.common.mvp.factory.PresenterFactory
 import com.example.arch.screen.common.mvvm.ViewModelFactory
@@ -13,20 +12,12 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PresentationModule(
-    private val activityComponent: ActivityComponent
-) {
-    @Provides fun activityComponent(): ActivityComponent = activityComponent
-
-    @Provides fun layoutInflater() = activityComponent.layoutInflater()
-
-    @Provides fun backPressDispatcher() = activityComponent.backPressDispatcher()
-
-    @Provides fun mvpViewFactory(
+class PresentationModule() {
+    @Provides @PresentationScope fun mvpViewFactory(
         layoutInflater: LayoutInflater
     ) = MvpViewFactory(layoutInflater)
 
-    @Provides fun presenterFactory(
+    @Provides @PresentationScope fun presenterFactory(
         screenNavigator: ScreenNavigator,
         findBlogItemService: FindBlogItemService,
         refreshViewsAndVotesService: RefreshViewsAndVotesService,
@@ -38,7 +29,7 @@ class PresentationModule(
         backPressDispatcher,
     )
 
-    @Provides fun viewModelFactory(
+    @Provides @PresentationScope fun viewModelFactory(
         screenNavigator: ScreenNavigator,
         findBlogItemService: FindBlogItemService,
         refreshViewsAndVotesService: RefreshViewsAndVotesService,
@@ -47,10 +38,4 @@ class PresentationModule(
         findBlogItemService,
         refreshViewsAndVotesService,
     )
-
-    @Provides fun screenNavigator() = activityComponent.screenNavigator()
-
-    @Provides fun findBlogItemService() = activityComponent.findBlogItemService()
-
-    @Provides fun refreshViewsAndVotesService() = activityComponent.refreshViewsAndVotesService()
 }

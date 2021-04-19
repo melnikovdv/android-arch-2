@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import androidx.fragment.app.FragmentManager
 import com.example.arch.blog.service.FindBlogItemService
 import com.example.arch.blog.service.RefreshViewsAndVotesService
+import com.example.arch.di.app.AppComponent
 import com.example.arch.screen.common.nav.BackPressDispatcher
 import com.example.arch.screen.common.nav.ScreenNavigator
 import dagger.Component
 
-@ActivityScope
-@Component(modules = [ActivityModule::class])
-interface ActivityComponent {
+
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [ActivityModule::class]
+) @ActivityScope interface ActivityComponent {
     fun application(): Application
 
     fun layoutInflater(): LayoutInflater

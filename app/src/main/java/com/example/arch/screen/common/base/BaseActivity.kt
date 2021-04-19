@@ -7,20 +7,12 @@ import com.example.arch.App
 import com.example.arch.di.activity.ActivityComponent
 import com.example.arch.di.activity.ActivityModule
 import com.example.arch.di.activity.DaggerActivityComponent
-import com.example.arch.di.presentation.DaggerPresentationComponent
-import com.example.arch.di.presentation.PresentationComponent
-import com.example.arch.di.presentation.PresentationModule
 import com.example.arch.screen.common.nav.BackPressDispatcher
 import com.example.arch.screen.common.nav.BackPressedListener
 
 abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
 
-    private val appComponent get() = (application as App).appComponent
-
     lateinit var activityComponent: ActivityComponent
-        private set
-
-    lateinit var presentationComponent: PresentationComponent
         private set
 
     private val backPressedListeners: MutableSet<BackPressedListener> = HashSet()
@@ -28,13 +20,10 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityComponent = DaggerActivityComponent.builder()
-            .activityModule(ActivityModule(this, appComponent, savedInstanceState))
+            .appComponent((application as App).appComponent)
+            .activityModule(ActivityModule(this, savedInstanceState))
             .build()
-        activityComponent.screenNavigator()
-        presentationComponent = DaggerPresentationComponent.builder()
-            .presentationModule(PresentationModule(activityComponent))
-            .build()
-
+        activityComponent.screenNavigator() // init root fragment
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
