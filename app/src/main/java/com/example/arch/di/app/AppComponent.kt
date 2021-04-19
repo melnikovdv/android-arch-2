@@ -1,7 +1,8 @@
 package com.example.arch.di.app
 
+import android.app.Application
 import com.example.arch.di.activity.ActivityComponent
-import com.example.arch.di.activity.ActivityModule
+import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
@@ -12,6 +13,10 @@ import javax.inject.Singleton
     ]
 ) @Singleton interface AppComponent {
 
-    fun newActivityComponent(activityModule: ActivityModule): ActivityComponent
+    fun newActivityComponentBuilder(): ActivityComponent.Builder
 
+    @Component.Builder interface Builder {
+        @BindsInstance fun application(application: Application): Builder
+        fun build(): AppComponent
+    }
 }

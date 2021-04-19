@@ -1,6 +1,5 @@
 package com.example.arch.di.app
 
-import android.app.Application
 import com.example.arch.api.Api
 import com.example.arch.api.ApiImpl
 import com.example.arch.blog.repo.BlogItemRepo
@@ -11,9 +10,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
 @Module
-class AppModule(val application: Application) {
-
-    @Provides fun application(): Application = application
+object AppModule {
 
     @Provides fun ioDispatcher(): CoroutineDispatcher = Dispatchers.IO
 

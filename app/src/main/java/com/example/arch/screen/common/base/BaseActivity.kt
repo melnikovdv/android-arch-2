@@ -5,7 +5,6 @@ import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.arch.App
 import com.example.arch.di.activity.ActivityComponent
-import com.example.arch.di.activity.ActivityModule
 import com.example.arch.screen.common.nav.BackPressDispatcher
 import com.example.arch.screen.common.nav.BackPressedListener
 import com.example.arch.screen.common.nav.ScreenNavigator
@@ -23,7 +22,10 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityComponent = (application as App).appComponent
-            .newActivityComponent(ActivityModule(this, savedInstanceState))
+            .newActivityComponentBuilder()
+            .activity(this)
+            .savedInstanceState(savedInstanceState)
+            .build()
         activityComponent.inject(this)
     }
 
