@@ -5,12 +5,14 @@ import com.example.arch.api.dto.BlogViewsAndVotesDto
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.util.Generator
 import javax.inject.Inject
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Singleton class ApiImpl @Inject constructor(
-    private val generator: Generator
+    private val generatorProvider: Provider<Generator>
 ) : Api {
     override fun fetchBlogItem(id: BlogItemId): BlogItemDto {
+        val generator = generatorProvider.get()
         return BlogItemDto(
             id.value,
             generator.string(10), generator.string(150),
@@ -20,6 +22,7 @@ import javax.inject.Singleton
     }
 
     override fun fetchBlogViewsAndVotes(id: BlogItemId): BlogViewsAndVotesDto {
+        val generator = generatorProvider.get()
         // emulating http request to server
         return BlogViewsAndVotesDto(
             id.value,
