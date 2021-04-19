@@ -1,31 +1,15 @@
 package com.example.arch.di.activity
 
-import android.app.Application
-import android.view.LayoutInflater
-import androidx.fragment.app.FragmentManager
-import com.example.arch.blog.service.FindBlogItemService
-import com.example.arch.blog.service.RefreshViewsAndVotesService
-import com.example.arch.di.app.AppComponent
-import com.example.arch.screen.common.nav.BackPressDispatcher
-import com.example.arch.screen.common.nav.ScreenNavigator
-import dagger.Component
+import com.example.arch.di.presentation.PresentationComponent
+import com.example.arch.di.presentation.PresentationModule
+import com.example.arch.screen.common.base.BaseActivity
+import dagger.Subcomponent
 
-
-@Component(
-    dependencies = [AppComponent::class],
+@Subcomponent(
     modules = [ActivityModule::class]
 ) @ActivityScope interface ActivityComponent {
-    fun application(): Application
 
-    fun layoutInflater(): LayoutInflater
+    fun newPresentationComponent(presentationModule: PresentationModule): PresentationComponent
 
-    fun fragmentManager(): FragmentManager
-
-    fun screenNavigator(): ScreenNavigator
-
-    fun findBlogItemService(): FindBlogItemService
-
-    fun refreshViewsAndVotesService(): RefreshViewsAndVotesService
-
-    fun backPressDispatcher(): BackPressDispatcher
+    fun inject(baseActivity: BaseActivity)
 }

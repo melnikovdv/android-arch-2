@@ -6,9 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.arch.App
 import com.example.arch.di.activity.ActivityComponent
 import com.example.arch.di.activity.ActivityModule
-import com.example.arch.di.activity.DaggerActivityComponent
 import com.example.arch.screen.common.nav.BackPressDispatcher
 import com.example.arch.screen.common.nav.BackPressedListener
+import com.example.arch.screen.common.nav.ScreenNavigator
+import javax.inject.Inject
 
 abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
 
@@ -17,18 +18,18 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
 
     private val backPressedListeners: MutableSet<BackPressedListener> = HashSet()
 
+    @Inject lateinit var screenNavigator: ScreenNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityComponent = DaggerActivityComponent.builder()
-            .appComponent((application as App).appComponent)
-            .activityModule(ActivityModule(this, savedInstanceState))
-            .build()
-        activityComponent.screenNavigator() // init root fragment
+        activityComponent = (application as App).appComponent
+            .newActivityComponent(ActivityModule(this, savedInstanceState))
+        activityComponent.inject(this)
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
-        activityComponent.screenNavigator().onSaveInstanceState(outState)
+        screenNavigator.onSaveInstanceState(outState)
     }
 
     override fun registerListener(listener: BackPressedListener) {

@@ -25,7 +25,7 @@ class AppModule(val application: Application) {
 
     @Provides @Singleton fun api(generator: Generator): Api = ApiImpl(generator)
 
-    @Provides fun ioDispatcher() = Dispatchers.IO
+    @Provides fun ioDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides @Singleton fun findBlogItemService(
         blogItemRepo: BlogItemRepo,
