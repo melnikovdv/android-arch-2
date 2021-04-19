@@ -4,9 +4,12 @@ import com.example.arch.api.dto.BlogItemDto
 import com.example.arch.api.dto.BlogViewsAndVotesDto
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.util.Generator
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class ApiImpl(private val generator: Generator) : Api {
-
+@Singleton class ApiImpl @Inject constructor(
+    private val generator: Generator
+) : Api {
     override fun fetchBlogItem(id: BlogItemId): BlogItemDto {
         return BlogItemDto(
             id.value,

@@ -9,8 +9,10 @@ import com.example.arch.util.Generator
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class FindBlogItemService(
+@Singleton class FindBlogItemService @Inject constructor(
     private val blogItemRepo: BlogItemRepo,
     private val api: Api,
     private val generator: Generator,

@@ -7,7 +7,7 @@ import com.example.arch.screen.root.RootFragment
 import dagger.Subcomponent
 
 @Subcomponent(
-    modules = [PresentationModule::class]
+    modules = []
 ) @PresentationScope interface PresentationComponent {
 
     fun inject(blogItemFragment: BlogItemFragment)

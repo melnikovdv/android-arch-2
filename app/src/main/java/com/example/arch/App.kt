@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.arch.di.app.AppComponent
 import com.example.arch.di.app.AppModule
 import com.example.arch.di.app.DaggerAppComponent
-import com.example.arch.di.app.ServiceModule
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -19,7 +18,6 @@ class App : Application() {
         Timber.d("onCreate")
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(this))
-            .serviceModule(ServiceModule())
             .build()
     }
 }

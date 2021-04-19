@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.blog.service.FindBlogItemService
 import com.example.arch.blog.service.RefreshViewsAndVotesService
+import com.example.arch.di.presentation.PresentationScope
 import com.example.arch.screen.blogitem2.BlogItemMvvmFragment
 import com.example.arch.screen.blogitem2.BlogItemViewModel
 import com.example.arch.screen.common.nav.ScreenNavigator
+import javax.inject.Inject
 
-class ViewModelFactory(
+@PresentationScope class ViewModelFactory @Inject constructor(
     private val screenNavigator: ScreenNavigator,
     private val findBlogItemService: FindBlogItemService,
     private val refreshViewsAndVotesService: RefreshViewsAndVotesService,

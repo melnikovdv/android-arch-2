@@ -3,12 +3,14 @@ package com.example.arch.screen.common.mvp.factory
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.blog.service.FindBlogItemService
 import com.example.arch.blog.service.RefreshViewsAndVotesService
+import com.example.arch.di.presentation.PresentationScope
 import com.example.arch.screen.blogitem.BlogItemPresenter
 import com.example.arch.screen.blogitems.BlogItemsPresenter
 import com.example.arch.screen.common.nav.BackPressDispatcher
 import com.example.arch.screen.common.nav.ScreenNavigator
+import javax.inject.Inject
 
-class PresenterFactory(
+@PresentationScope class PresenterFactory @Inject constructor(
     private val screenNavigator: ScreenNavigator,
     private val findBlogItemService: FindBlogItemService,
     private val refreshViewsAndVotesService: RefreshViewsAndVotesService,

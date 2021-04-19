@@ -3,8 +3,10 @@ package com.example.arch.blog.repo
 import com.example.arch.blog.model.BlogItem
 import com.example.arch.blog.model.BlogItemId
 import java.util.concurrent.ConcurrentHashMap
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class BlogItemRepoImpl : BlogItemRepo {
+@Singleton class BlogItemRepoImpl @Inject constructor() : BlogItemRepo {
 
     private val items: MutableMap<BlogItemId, BlogItem> = ConcurrentHashMap()
 

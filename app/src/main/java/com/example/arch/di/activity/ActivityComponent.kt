@@ -5,7 +5,10 @@ import com.example.arch.screen.common.base.BaseActivity
 import dagger.Subcomponent
 
 @Subcomponent(
-    modules = [ActivityModule::class]
+    modules = [
+        ActivityModule::class,
+        ActivityModule.Binds::class,
+    ]
 ) @ActivityScope interface ActivityComponent {
 
     fun newPresentationComponent(): PresentationComponent

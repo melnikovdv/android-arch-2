@@ -1,8 +1,10 @@
 package com.example.arch.util
 
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Generator {
+@Singleton class Generator @Inject constructor() {
     private val random: Random = Random()
 
     fun string(length: Int): String {
