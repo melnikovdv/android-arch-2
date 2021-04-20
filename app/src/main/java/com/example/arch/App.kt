@@ -1,22 +1,16 @@
 package com.example.arch
 
 import android.app.Application
-import com.example.arch.di.app.AppComponent
-import com.example.arch.di.app.DaggerAppComponent
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
-
+@HiltAndroidApp
 class App : Application() {
-
-    lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(DebugTree())
         Timber.d("onCreate")
-        appComponent = DaggerAppComponent.builder()
-            .application(this)
-            .build()
     }
 }

@@ -5,24 +5,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.arch.R
 import com.example.arch.blog.model.BlogItemId
-import com.example.arch.di.activity.ActivityScope
 import com.example.arch.screen.blogitem.BlogItemFragment
 import com.example.arch.screen.blogitem2.BlogItemMvvmFragment
 import com.example.arch.screen.blogitems.BlogItemsFragment
 import com.example.arch.screen.root.RootFragment
 import com.ncapdevi.fragnav.FragNavController
+import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
-@ActivityScope class ScreenNavigator @Inject constructor(
+@ActivityScoped class ScreenNavigator @Inject constructor(
     fragmentManager: FragmentManager,
-    savedInstanceState: Bundle?
 ) : FragNavController.RootFragmentListener {
 
     private val fragNavController = FragNavController(fragmentManager, R.id.container)
 
-    init {
+    fun initialize(savedInstanceState: Bundle?) {
         fragNavController.rootFragmentListener = this
-        fragNavController.initialize(FragNavController.TAB1, savedInstanceState);
+        fragNavController.initialize(FragNavController.TAB1, savedInstanceState)
     }
 
     fun toBlogItem(id: BlogItemId) {

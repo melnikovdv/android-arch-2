@@ -8,12 +8,13 @@ import com.example.arch.di.qual.ApiToken
 import com.example.arch.di.qual.MapboxToken
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Named
 
-@Module
-object AppModule {
+@Module @InstallIn(SingletonComponent::class) object AppModule {
 
     @Provides fun ioDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
@@ -23,7 +24,7 @@ object AppModule {
 
     @Provides @Named("some") fun someString(): String = "some_string"
 
-    @Module interface Binds {
+    @Module @InstallIn(SingletonComponent::class) interface Binds {
         @dagger.Binds fun blogItemRepo(blogItemRepoImpl: BlogItemRepoImpl): BlogItemRepo
         @dagger.Binds fun api(apiImpl: ApiImpl): Api
     }

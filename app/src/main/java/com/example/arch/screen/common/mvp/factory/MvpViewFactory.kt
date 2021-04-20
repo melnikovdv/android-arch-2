@@ -2,7 +2,6 @@ package com.example.arch.screen.common.mvp.factory
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.arch.di.presentation.PresentationScope
 import com.example.arch.screen.blogitem.BlogItemMvpView
 import com.example.arch.screen.blogitem.BlogItemMvpViewImpl
 import com.example.arch.screen.blogitems.BlogItemsAdapter
@@ -10,9 +9,10 @@ import com.example.arch.screen.blogitems.BlogItemsMvpView
 import com.example.arch.screen.blogitems.BlogItemsMvpViewImpl
 import com.example.arch.screen.blogitems.row.BlogItemsRowMvpView
 import com.example.arch.screen.blogitems.row.BlogItemsRowMvpViewImpl
+import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
-@PresentationScope class MvpViewFactory @Inject constructor(
+@ActivityScoped class MvpViewFactory @Inject constructor(
     private val layoutInflater: LayoutInflater
 ) {
     fun createBlogItemMvpView(

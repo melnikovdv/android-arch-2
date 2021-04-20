@@ -10,9 +10,11 @@ import com.example.arch.R
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.screen.common.base.BaseFragment
 import com.example.arch.screen.common.nav.ScreenNavigator
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class RootFragment : BaseFragment() {
 
     private lateinit var btnBlogItem: Button
@@ -27,7 +29,6 @@ class RootFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presentationComponent.inject(this)
     }
 
     override fun onCreateView(

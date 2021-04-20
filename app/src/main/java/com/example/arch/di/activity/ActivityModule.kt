@@ -1,21 +1,28 @@
 package com.example.arch.di.activity
 
+import android.app.Activity
 import android.view.LayoutInflater
 import androidx.fragment.app.FragmentManager
 import com.example.arch.screen.common.base.BaseActivity
 import com.example.arch.screen.common.nav.BackPressDispatcher
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.scopes.ActivityScoped
 
-@Module
+@Module @InstallIn(ActivityComponent::class)
 object ActivityModule {
-    @Provides @ActivityScope fun layoutInflater(baseActivity: BaseActivity) =
+    @Provides fun layoutInflater(baseActivity: BaseActivity) =
         LayoutInflater.from(baseActivity)
 
-    @Provides @ActivityScope fun fragmentManager(baseActivity: BaseActivity): FragmentManager =
+    @Provides @ActivityScoped fun fragmentManager(baseActivity: BaseActivity): FragmentManager =
         baseActivity.supportFragmentManager
 
-    @Module interface Binds {
+    @Provides @ActivityScoped fun baseActivity(activity: Activity): BaseActivity =
+        activity as BaseActivity
+
+    @Module @InstallIn(ActivityComponent::class) interface Binds {
         @dagger.Binds fun backPressDispatcher(baseActivity: BaseActivity): BackPressDispatcher
     }
 }

@@ -3,21 +3,18 @@ package com.example.arch.screen.common.base
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.arch.App
-import com.example.arch.di.activity.ActivityComponent
 import com.example.arch.di.qual.ApiToken
 import com.example.arch.di.qual.MapboxToken
 import com.example.arch.screen.common.nav.BackPressDispatcher
 import com.example.arch.screen.common.nav.BackPressedListener
 import com.example.arch.screen.common.nav.ScreenNavigator
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
+@AndroidEntryPoint
 abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
-
-    lateinit var activityComponent: ActivityComponent
-        private set
 
     private val backPressedListeners: MutableSet<BackPressedListener> = HashSet()
 
@@ -28,12 +25,7 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityComponent = (application as App).appComponent
-            .newActivityComponentBuilder()
-            .activity(this)
-            .savedInstanceState(savedInstanceState)
-            .build()
-        activityComponent.inject(this)
+        screenNavigator.initialize(savedInstanceState)
         Timber.d("Qualifier api: $apiToken")
         Timber.d("Qualifier mapbox: $mapboxToken")
         Timber.d("Qualifier some: $someString")

@@ -6,13 +6,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.arch.blog.model.BlogItemId
 import com.example.arch.blog.service.FindBlogItemService
 import com.example.arch.blog.service.RefreshViewsAndVotesService
-import com.example.arch.di.presentation.PresentationScope
 import com.example.arch.screen.blogitem2.BlogItemMvvmFragment
 import com.example.arch.screen.blogitem2.BlogItemViewModel
 import com.example.arch.screen.common.nav.ScreenNavigator
+import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
-@PresentationScope class ViewModelFactory @Inject constructor(
+@ActivityScoped class ViewModelFactory @Inject constructor(
     private val screenNavigator: ScreenNavigator,
     private val findBlogItemService: FindBlogItemService,
     private val refreshViewsAndVotesService: RefreshViewsAndVotesService,
@@ -44,6 +44,4 @@ import javax.inject.Inject
             }
         }
     }
-
-
 }

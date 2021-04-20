@@ -14,9 +14,10 @@ import com.example.arch.screen.blogitem2.util.Status
 import com.example.arch.screen.common.base.BaseFragment
 import com.example.arch.screen.common.mvvm.ViewModelFactory
 import com.example.arch.screen.common.nav.BackPressDispatcher
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class BlogItemMvvmFragment : BaseFragment() {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory
@@ -25,9 +26,8 @@ class BlogItemMvvmFragment : BaseFragment() {
     private lateinit var blogItemViewModel: BlogItemViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        presentationComponent.inject(this)
         super.onCreate(savedInstanceState)
-        val blogItemId = BlogItemId(arguments!!.getLong(ARG_ITEM_ID))
+        val blogItemId = BlogItemId(requireArguments().getLong(ARG_ITEM_ID))
         blogItemViewModel = viewModelFactory.createBlogItemViewModel(blogItemId, this)
         blogItemViewModel.loadItem()
     }

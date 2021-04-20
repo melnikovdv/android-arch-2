@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import com.example.arch.screen.common.base.BaseFragment
 import com.example.arch.screen.common.mvp.factory.MvpViewFactory
 import com.example.arch.screen.common.mvp.factory.PresenterFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class BlogItemsFragment : BaseFragment() {
 
     @Inject lateinit var presenterFactory: PresenterFactory
@@ -18,7 +20,6 @@ class BlogItemsFragment : BaseFragment() {
     private lateinit var presenter: BlogItemsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        presentationComponent.inject(this)
         super.onCreate(savedInstanceState)
         presenter = presenterFactory.createBlogItemsPresenter()
     }
