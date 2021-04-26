@@ -13,12 +13,11 @@ import com.ncapdevi.fragnav.FragNavController
 
 class ScreenNavigator(
     fragmentManager: FragmentManager,
-    savedInstanceState: Bundle?
 ) : FragNavController.RootFragmentListener {
 
     private val fragNavController = FragNavController(fragmentManager, R.id.container)
 
-    init {
+    fun init(savedInstanceState: Bundle?) {
         fragNavController.rootFragmentListener = this
         fragNavController.initialize(FragNavController.TAB1, savedInstanceState);
     }

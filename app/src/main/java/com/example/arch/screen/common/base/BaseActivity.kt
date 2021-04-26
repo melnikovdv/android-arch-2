@@ -23,10 +23,10 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
     private val backPressedListeners: MutableSet<BackPressedListener> = HashSet()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         activityCompositionRoot = ActivityCompositionRoot(
-            this, appCompositionRoot, savedInstanceState
+            this, appCompositionRoot,
         )
+        super.onCreate(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
