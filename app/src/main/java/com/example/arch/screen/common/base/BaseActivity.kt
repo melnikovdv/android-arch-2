@@ -27,12 +27,12 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
     @Inject @Named("some") lateinit var someString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         activityComponent = (application as App).appComponent
             .newActivityComponentBuilder()
             .activity(this)
             .savedInstanceState(savedInstanceState)
             .build()
+        super.onCreate(savedInstanceState)
         activityComponent.inject(this)
         Timber.d("Qualifier api: $apiToken")
         Timber.d("Qualifier mapbox: $mapboxToken")
