@@ -1,7 +1,6 @@
 package com.example.arch.screen.common.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.arch.App
 import com.example.arch.di.ActivityCompositionRoot
@@ -29,8 +28,8 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
         activityCompositionRoot.screenNavigator.onSaveInstanceState(outState)
     }
 
