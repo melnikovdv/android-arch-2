@@ -1,7 +1,6 @@
 package com.example.arch.screen.common.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.arch.di.qual.ApiToken
 import com.example.arch.di.qual.MapboxToken
@@ -31,8 +30,8 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
         Timber.d("Qualifier some: $someString")
     }
 
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
         screenNavigator.onSaveInstanceState(outState)
     }
 
